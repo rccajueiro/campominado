@@ -40,7 +40,7 @@ Resultado
 
 ### Métodos
 
-- jogando?: Verifica se o jogo esta em andamento, ou seja, quando não foi descoberto bomba. Se errar (clicar em uma bomba) ou abrir todas as células válidas, terá o retorno negativo.
+- jogando?: Verifica se o jogo esta em andamento, ou seja, quando não foi descoberto bomba ou aberto todas as células válidas. Se errar (clicar em uma bomba) ou abrir todas as células válidas, terá o retorno negativo.
 
 ```
 jogo = CampoMinado.new(10, 20, 50)
