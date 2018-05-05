@@ -1,6 +1,11 @@
 require_relative './../../config/constants'
 
 class CampoMinadoIniciacao
+	# método initialize
+	# método construtor da classe
+	# recebe as informações de número de linhas, número de colunas e quantidad e de bombas
+	# recebe, mas não é obrigatório, uma matriz com posicionamento de bombas
+	# esse último para fins de teste unitário
 	def initialize(linhas, colunas, qtd_bombas, bombas_pre_definidas=nil)
 		# valida quantidade de linhas
 		if linhas < 1
@@ -42,7 +47,8 @@ class CampoMinadoIniciacao
 	end
 
 	private 
-		# monta celulas fechada
+		# método gera_matriz
+		# responsável em montar celulas fechada da matriz principal
 		def gera_matriz
 			@matriz = []
 			for x in 0..@linhas-1
@@ -53,7 +59,8 @@ class CampoMinadoIniciacao
 			end
 		end
 
-		# posicao das bombas aleatoriamente
+		# método insere_bombas
+		# cria uma matriz com posicao das bombas aleatoriamente, caso o parâmetro bombas_pre_definidas venha nulo (nil)
 		def insere_bombas(bombas_pre_definidas)
 			if bombas_pre_definidas == nil
 				contador = 0

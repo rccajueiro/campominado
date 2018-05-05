@@ -1,61 +1,83 @@
 # CAMPO MINADO
 
-Sua empresa está criando um jogo de campo minado (Minesweeper), e precisa da sua ajuda para construir a engine em Ruby que gerencia o estado do jogo e as jogadas. O jogo será lançado em vários dispositivos, e cada um deles será responsável pelo tratamento de input e output para o usuário. Sua engine deve fornecer uma interface de métodos que podem ser chamados pelo cliente para interagir com o jogo: clicar em uma célula, saber o status do tabuleiro, saber se o jogo já acabou etc.
+## Getting Started
+Jogo Campo Minado desenvolvido em Ruby para fins teste de conhecimento
 
-Nota: usamos a terminologia "clicar" para traçar uma analogia com uma jogada de escolher uma célula no campo minado. Clicar, literalmente, não faz parte deste exercício; não é necessária uma interface gráfica.
+### Pré-requisito
+Sem dependências
 
+### Instalação
+```
+git clone https://github.com/rccajueiro/campominado.git
+```
 
-Requisitos:
+### Uso
+```
+require './app/lib/CampoMinado'
+require './app/lib/PrettyPrinter'
 
-1. No início do jogo, a engine deve aceitar parâmetros de altura, largura e número de bombas no tabuleiro. As bombas devem ser distribuídas aleatoriamente, de forma que todas as combinações de posições possíveis tenham a mesma probabilidade de acontecer.
+largura, altura, qtd_bombas = 10, 20, 50
+jogo = CampoMinado.new(largura, altura, qtd_bombas)
+PrettyPrinter.new.print jogo.estado_atual
+```
 
-2. Sua engine deve expor um conjunto mínimo de métodos para o cliente:
+Resultado
+```
+   _________________________[10 x 20]_________________________
+  | 1| 2| 3| 4| 5| 6| 7| 8| 9|10|11|12|13|14|15|16|17|18|19|20|
+ 1| .| .| .| .| .| .| .| .| .| .| .| .| .| .| .| .| .| .| .| .|
+ 2| .| .| .| .| .| .| .| .| .| .| .| .| .| .| .| .| .| .| .| .|
+ 3| .| .| .| .| .| .| .| .| .| .| .| .| .| .| .| .| .| .| .| .|
+ 4| .| .| .| .| .| .| .| .| .| .| .| .| .| .| .| .| .| .| .| .|
+ 5| .| .| .| .| .| .| .| .| .| .| .| .| .| .| .| .| .| .| .| .|
+ 6| .| .| .| .| .| .| .| .| .| .| .| .| .| .| .| .| .| .| .| .|
+ 7| .| .| .| .| .| .| .| .| .| .| .| .| .| .| .| .| .| .| .| .|
+ 8| .| .| .| .| .| .| .| .| .| .| .| .| .| .| .| .| .| .| .| .|
+ 9| .| .| .| .| .| .| .| .| .| .| .| .| .| .| .| .| .| .| .| .|
+10| .| .| .| .| .| .| .| .| .| .| .| .| .| .| .| .| .| .| .| .|
+   ===========================================================
+```
 
-  - play: recebe as coordenadas x e y do tabuleiro e clica na célula correspondente; a célula passa a ser "descoberta". Deve retornar um booleano informando se a jogada foi válida. A jogada é válida somente se a célula selecionada ainda não foi clicada e ainda não tem uma bandeira. Caso a célula clicada seja válida, não tenha uma bomba e seja vizinha de zero bombas, todos os vizinhos sem bomba e sem bandeira daquela célula também devem ser descobertas, e devem seguir esta mesma lógica para seus próprios vizinhos (esse é o comportamento de expansão quando clicamos em uma grande área sem bombas no jogo de campo minado).
+### Métodos
 
-  - flag: adiciona uma bandeira a uma célula ainda não clicada ou remove a bandeira preexistente de uma célula. Retorna um booleano informando se a jogada foi válida.
+*jogando?*
+*jogar(x, y)*
+*marcar_bandeira(x, y)*
+*estado_atual*
+*ganhou?*
 
-  - still_playing?: retorna true se o jogo ainda está em andamento, ou false se o jogador tiver alcançado a condição de vitória (todas as células sem bomba foram descobertas) ou de derrota (jogador clicou em uma célula sem bandeira e ela tinha uma bomba).
+### Testes unitário
 
-  - victory?: retorna true somente se o jogo já acabou e o jogador ganhou.
+```
+ruby test/TestCampoMinadoIniciacao.rb
+```
 
-  - board_state: retorna uma representação atual do tabuleiro, indicando quais células ainda não foram descobertas, se alguma foi descoberta e tem uma bomba, quais foram descobertas e têm células com bombas como vizinhas (indicar quantas são as vizinhas minadas), quais não estão descobertas e com bandeira. Se o cliente passar o hash {xray: true} como parâmetro, deve indicar a localização de todas as bombas, mas somente se o jogo estiver terminado.
+```
+ruby test/TestCampoMinadoValidacao.rb
+```
 
+```
+ruby test/TestCampoMinado.rb
+```
 
-3. Uma célula descoberta deve saber informar o número de bombas adjacentes a ela, se houver alguma (entre 1 e 8). Se não tiver bombas adjacentes, deve ser considerada uma célula descoberta e vazia.
+## Aplicativos
 
-4. Crie pelo menos dois tipos de objeto "printer" que mostrem no terminal o estado do tabuleiro. Esses printers servem como exemplo de como um cliente pode consumir o método "board_state" da sua engine. Por exemplo, um deles pode simplesmente imprimir uma matriz mapeando os estados para caracteres segundo a especificação:
+### apptest.rb
+```
+ruby apptest.rb
+```
 
-board_format = {
-  unknown_cell: '.',
-  clear_cell: ' ',
-  bomb: '#',
-  flag: 'F'
-}
-5. Ao efetuar uma jogada em uma bomba (sem bandeira), o jogo deve terminar e nenhuma outra jogada subsequente deve ser considerada válida.
+### jogar.rb
+```
+ruby jogar.rb
+```
 
-6. Demonstre, da maneira que achar melhor, que o seu projeto funciona como especificado.
+## Referências
+* [Ruby on Rails](https://rubificando.wordpress.com/2009/03/02/matrizes) - Matrizes
+* [tutorialspoint](https://www.tutorialspoint.com/ruby/index.htm) - Ruby Tutorial
+* [Stack Overflow](https://stackoverflow.com/questions/2889720/one-liner-in-ruby-for-displaying-a-prompt-getting-input-and-assigning-to-a-var) - One liner in Ruby for displaying a prompt, getting input, and assigning to a variable?
 
-===
+## Autor
+* **Ricardo Cajueiro** - *Software Developer* - [PurpleBooth](https://github.com/rccajueiro)
 
-Pequeno exemplo de uso da engine por um cliente:
-
-width, height, num_mines = 10, 20, 50
-game = Minesweeper.new(width, height, num_mines)
-
-while game.still_playing?
-  valid_move = game.play(rand(width), rand(height))
-  valid_flag = game.flag(rand(width), rand(height))
-  if valid_move or valid_flag
-  printer = (rand > 0.5) ? SimplePrinter.new : PrettyPrinter.new
-  printer.print(game.board_state)
-  end
-end
-
-puts "Fim do jogo!"
-if game.victory?
-  puts "Você venceu!"
-else
-  puts "Você perdeu! As minas eram:"
-  PrettyPrinter.new.print(game.board_state(xray: true))
-end
+## Considerações finais

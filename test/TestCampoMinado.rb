@@ -3,31 +3,38 @@ require_relative './../app/lib/CampoMinado/CampoMinado'
 require_relative './../app/lib/PrettyPrinter'
 
 class TestCampoMinado < Test::Unit::TestCase
+	# teste de uma jogada válida
 	def testJogadaValida
 		game = CampoMinado.new(10, 20, 50)
 		assert_equal(true, game.jogar(0, 0))
 	end
 
+	# teste de uma jogada inválida
 	def testJogadaInvalida
 		game = CampoMinado.new(10, 20, 50)
 		assert_equal(false, game.jogar(-1, -1))
 	end
 
-	def testInsereFlagValida
+	# teste para inserir uma marcação de bandeira (flag) válida
+	def testInsereMarcacaoBandeiraValida
 		game = CampoMinado.new(10, 20, 50)
 		assert_equal(true, game.marcar_bandeira(5, 10))
 	end
 
-	def testInsereFlagInvalida
+	# teste para inserir uma marcação de bandeira (flag) inválida
+	def testInsereMarcacaoBandeiraInvalida
 		game = CampoMinado.new(10, 20, 50)
 		assert_equal(false, game.marcar_bandeira(20, 10))
 	end
 
-	def testInsereERemoveFlag
+	# teste para inserir e remover uma marcação de bandeira válida
+	def testInsereERemoveMarcacaoBandeira
 		game = CampoMinado.new(10, 20, 50)
-		assert_equal(true, game.marcar_bandeira(0, 0) && game.marcar_bandeira(0, 0))
+		assert_equal(true, game.marcar_bandeira(0, 0))
+		assert_equal(true, game.marcar_bandeira(0, 0))
 	end
 
+	# teste de vitória
 	def testGanhou
 		# 3x5 / 3 bombas
 		# _____
@@ -56,15 +63,15 @@ class TestCampoMinado < Test::Unit::TestCase
 		game = CampoMinado.new(3, 5, 3, bombas_pre_definidas)
 
 		jogadas.each do |jogada|
-			# PrettyPrinter.new.print game.estado_atual
+			assert_equal(true, game.jogando?)
 			assert_equal(true, game.jogar(jogada[0], jogada[1]))
 		end
 
-		# PrettyPrinter.new.print game.estado_atual
-		
-		assert_equal(true, !game.jogando? && game.ganhou?)
+		assert_equal(false, game.jogando?)
+		assert_equal(true, game.ganhou?)
 	end
 
+	# teste de derrota
 	def testPerdeu
 		# 3x5 / 3 bombas
 		# _____
@@ -81,12 +88,14 @@ class TestCampoMinado < Test::Unit::TestCase
 		]
 
 		game = CampoMinado.new(3, 5, 3, bombas_pre_definidas)
+		assert_equal(true, game.jogando?)
 		assert_equal(true, game.jogar(0, 0))
 
-		# PrettyPrinter.new.print game.estado_atual(xray: true)
+		assert_equal(false, game.jogando?)
 		assert_equal(true, !game.jogando? && game.perdeu?)
 	end
 
+	# teste em abrir células vazias
 	def testAbrirVazios
 		# 5x8 / 4 bombas
 		# ________
@@ -106,10 +115,10 @@ class TestCampoMinado < Test::Unit::TestCase
 		]
 
 		game = CampoMinado.new(5, 8, 4, bombas_pre_definidas)
-		# PrettyPrinter.new.print game.estado_atual
 
+		assert_equal(true, game.jogando?)
 		assert_equal(true, game.jogar(2, 4))
-		# PrettyPrinter.new.print game.estado_atual
+		
 		assert_equal(true, game.jogando?)
 		assert_equal(24, game.get_qtd_descoberto)
 	end

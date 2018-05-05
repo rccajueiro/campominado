@@ -2,15 +2,20 @@ require_relative './../../config/constants'
 require_relative './CampoMinadoIniciacao'
 
 class CampoMinadoValidacao < CampoMinadoIniciacao
+	# método get_qtd_valida
+	# retorna a quantidad e células válidas (não pussuem bomba)
 	def get_qtd_valida
 		return @qtd_valida
 	end
 
+	# método jogada_valida?
+	# verifica se as coordenadas passadas são válidas
 	def jogada_valida?(x, y)
 		return x>=0 && x<=@matriz.size-1 && y>=0 && y<=@matriz[0].size-1
 	end	
 
-	# retorna o total de bombas em volta da celula ou falso se não existe
+	# método tem_bombas_em_volta?
+	# retorna o total de bombas em volta da célula ou falso se não existe
 	def tem_bombas_em_volta?(x, y)
 		total_bombas_em_volta = 0
 

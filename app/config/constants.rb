@@ -5,6 +5,7 @@ $ERRO_QTD_BOMBAS_INVALIDA = 'Quantidade de bombas inválida'
 $ERRP_QTD_BOMBAS_PRE_DEFINIDAS = 'Quantidade de bombas pre-definidas não confere'
 $ERRO_BOMBA_PREDEFINIDA_FORA_MATRIZ = 'Bombas pre-definidas foram da matriz do jogo'
 
+# Tipo de células
 $_CELULA_FECHADA = '.'
 $_CELULA_BOMBA = '#'
 $_CELULA_VAZIA = ''
