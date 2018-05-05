@@ -40,7 +40,7 @@ Resultado
 
 ### Métodos
 
-*jogando?* - Verifica se o jogo esta em andamento, ou seja, quando não foi descoberto bomba. Se errar (clicar em uma bomba) ou abrir todas as células válidas, terá o retorno negativo.
+- jogando?: Verifica se o jogo esta em andamento, ou seja, quando não foi descoberto bomba. Se errar (clicar em uma bomba) ou abrir todas as células válidas, terá o retorno negativo.
 
 ```
 jogo = CampoMinado.new(10, 20, 50)
@@ -50,7 +50,7 @@ if jogo.jogando?
 end
 ```
 
-*jogar(x, y)* - Realiza jogada em uma célula.
+- jogar(x, y): Realiza jogada em uma célula. Recebe as coordenadas (X, Y) e clica na célula correpondendo, relevando espaço vazio, número de bombas em volta ou a própria bomba.
 
 ```
 jogo = CampoMinado.new(10, 20, 50)
@@ -60,7 +60,7 @@ if jogo.jogar(0, 0)
 end
 ```
 
-*marcar_bandeira(x, y)* - Faz uma marcação de bandeira. Célula marcada com bandeira não permite jogada.
+- marcar_bandeira(x, y): Faz uma marcação de bandeira. A célula marcada com bandeira não permite jogada. Se enviar outra marcação na célula marcada com bandeira, irá desmarcar.
 
 ```
 jogo = CampoMinado.new(10, 20, 50)
@@ -70,7 +70,7 @@ if jogo.marcar_bandeira(0, 0)
 end
 ```
 
-*estado_atual* - Retorna a matriz do jogo. Passando como paramêtro *xray: true* e o jogo estiver perdido, retorna a matriz com as bombas reveladas.
+- estado_atual: - Retorna a matriz do jogo com os campos já relevados. Passando como paramêtro *xray: true* e o jogo estiver perdido, retorna a matriz com as bombas reveladas.
 
 ```
 jogo = CampoMinado.new(10, 20, 50)
@@ -78,7 +78,7 @@ jogo = CampoMinado.new(10, 20, 50)
 puts jogo.estado_atual
 ```
 
-*ganhou?* - Retorna positivo quando a partida finalizou e abriu todas as céluas válidas.
+- ganhou?: - Retorna positivo quando a partida finalizou e abriu todas as céluas válidas.
 
 ```
 jogo = CampoMinado.new(10, 20, 50)
