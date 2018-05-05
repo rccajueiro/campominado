@@ -26,12 +26,15 @@ Requisitos:
 
 4. Crie pelo menos dois tipos de objeto "printer" que mostrem no terminal o estado do tabuleiro. Esses printers servem como exemplo de como um cliente pode consumir o método "board_state" da sua engine. Por exemplo, um deles pode simplesmente imprimir uma matriz mapeando os estados para caracteres segundo a especificação:
 
+```
 board_format = {
   unknown_cell: '.',
   clear_cell: ' ',
   bomb: '#',
   flag: 'F'
 }
+```
+
 5. Ao efetuar uma jogada em uma bomba (sem bandeira), o jogo deve terminar e nenhuma outra jogada subsequente deve ser considerada válida.
 
 6. Demonstre, da maneira que achar melhor, que o seu projeto funciona como especificado.
@@ -40,6 +43,7 @@ board_format = {
 
 Pequeno exemplo de uso da engine por um cliente:
 
+```
 width, height, num_mines = 10, 20, 50
 game = Minesweeper.new(width, height, num_mines)
 
@@ -59,3 +63,4 @@ else
   puts "Você perdeu! As minas eram:"
   PrettyPrinter.new.print(game.board_state(xray: true))
 end
+```
