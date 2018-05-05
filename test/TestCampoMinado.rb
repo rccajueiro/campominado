@@ -88,27 +88,29 @@ class TestCampoMinado < Test::Unit::TestCase
 	end
 
 	def testAbrirVazios
-		# 3x5 / 3 bombas
-		# _____
-		# #21..
-		# 3#2..
-		# 2#2..
-		# _____
+		# 5x8 / 4 bombas
+		# ________
+		# #21.....
+		# 3#2.....
+		# 2#2.....
+		# ......11
+		# ......1#
+		# ========
 
 		# BOMBAS
 		bombas_pre_definidas = [
 			[0,0],
 			[1,1],
-			[2,1]
+			[2,1],
+			[4,7]
 		]
 
-		game = CampoMinado.new(3, 5, 3, bombas_pre_definidas)
+		game = CampoMinado.new(5, 8, 4, bombas_pre_definidas)
 		# PrettyPrinter.new.print game.estado_atual
 
 		assert_equal(true, game.jogar(2, 4))
-
 		# PrettyPrinter.new.print game.estado_atual
 		assert_equal(true, game.jogando?)
-		assert_equal(6, game.get_qtd_descoberto)
+		assert_equal(24, game.get_qtd_descoberto)
 	end
 end
