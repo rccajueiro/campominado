@@ -37,23 +37,8 @@ class CampoMinado < CampoMinadoValidacao
 	# se a célula não foi aberta e não possui bandeira, vai marcar uma bandeira (F)
 	# se a célular já possui uma bandeira, irá remover a bandeira
 	def marcar_bandeira(x, y)
-		if jogada_valida?(x, y) && (@matriz[x][y] == $_CELULA_FLAG || @matriz[x][y] == $_CELULA_FECHADA)
-			if @matriz[x][y] == $_CELULA_FECHADA
-				@matriz[x][y] = $_CELULA_FLAG
-				
-				# quando coloca uma flag em cima de uma bomba, ela se torna uma célula valida
-				if tem_bombas_em_volta?(x, y) != false
-					@qtd_valida+= 1
-				end
-			else
-				@matriz[x][y] = $_CELULA_FECHADA
-				
-				# e quando remove a flag e tem bomba, ela volta a ser uma célula invalida (com bomba)
-				if tem_bombas_em_volta?(x, y) != false
-					@qtd_valida-= 1
-				end
-			end
-
+		if jogada_valida?(x, y)
+			@matriz[x][y] = @matriz[x][y] == $_CELULA_FLAG ? $_CELULA_FECHADA : $_CELULA_FLAG
 			return true
 		end
 
