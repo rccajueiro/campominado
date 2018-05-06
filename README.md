@@ -325,5 +325,20 @@ Resultado
 
 * **Ricardo Cajueiro** - *Software Developer* - [rccajueiro](https://github.com/rccajueiro)
 
-## Considerações finais
+## Considerações
 
+- No início foi realizado o desenvolvimento do core da engine principal, ou seja, toda lógica de funcionamento do sistema de campo minado;
+- Em seguida realizado os testes unitários;
+- Enquanto desenvolvia dos testes unitários foi tendo necessidade de eventuais ajustes no core com melhorias de performance, clean code e validações;
+- Os testes realizados prevem todas situações possíveis;
+- Interface "jogável" (jogar.rb) desenvolvida utilizando boas práticas de UX (dentro da limitação do console) visando simplicidade e facilidade de navegação/utilização.
+
+## Outras considerações
+
+- Esse foi meu primeiro contato mais aprofundado com a sintaxe Ruby;
+- Da mesma forma em PHP, o Ruby é dinamicamente tipado e isso facilitou a adaptação;
+- Estou acostumado com lingagens que utilizam chaves "{}" para iniciar e finalizar trechos como loops, condições, funcões/classes/métodos, etc; e ";" para finalizar instruções. No começo tive um pouco de dificuldade mas logo fui pegando o jeito;
+- Em PHP, se testar 0 é considerado false, para testar se é 0 (número) deve usar ===. Em Ruby "nil" e "false" serem falso facilita muito o desenvolvimento;
+- Sendo opcional o uso dos parêntesis, deixa o código mais clean e facilita a leitura e organização;
+- Strings, números, arrays, hashes, etc serem objetos, também facilita o uso e organização;
+- Nesse exercício tive a oportunidade de aprofundar no conhecimento do Ruby. Ainda tem muita à aprender e novos desafios a trilhar. Nesse ramo de atividade estamos sempre aprendendo coisas novas e ajudando um ao outro para todos atinger sempre o ponto mais alto.
