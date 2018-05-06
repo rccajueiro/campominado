@@ -337,8 +337,8 @@ Resultado
 
 - Esse foi meu primeiro contato mais aprofundado com a sintaxe Ruby;
 - Da mesma forma em PHP, o Ruby é dinamicamente tipado e isso facilitou a adaptação;
-- Estou acostumado com lingagens que utilizam chaves "{}" para iniciar e finalizar trechos como loops, condições, funcões/classes/métodos, etc; e ";" para finalizar instruções. No começo tive um pouco de dificuldade mas logo fui pegando o jeito;
+- Estou acostumado com lingagens que utilizam chaves "{}" para iniciar e finalizar trechos como loops, condições, funcões/classes/métodos, etc; e ";" para finalizar instruções. No começo tive um pouco de dificuldade mas logo peguei o jeito;
 - Em PHP, se testar 0 é considerado false, para testar se é 0 (número) deve usar ===. Em Ruby "nil" e "false" serem falso facilita muito o desenvolvimento;
 - Sendo opcional o uso dos parêntesis, deixa o código mais clean e facilita a leitura e organização;
 - Strings, números, arrays, hashes, etc serem objetos, também facilita o uso e organização;
-- Nesse exercício tive a oportunidade de aprofundar no conhecimento do Ruby. Ainda tem muita à aprender e novos desafios a trilhar. Nesse ramo de atividade estamos sempre aprendendo coisas novas e ajudando um ao outro para todos atinger sempre o ponto mais alto.
+- Nesse exercício tive a oportunidade de aprofundar no conhecimento do Ruby. Ainda tem muita à aprender e novos desafios a trilhar.
