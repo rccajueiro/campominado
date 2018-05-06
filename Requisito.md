@@ -4,7 +4,6 @@ Sua empresa está criando um jogo de campo minado (Minesweeper), e precisa da su
 
 Nota: usamos a terminologia "clicar" para traçar uma analogia com uma jogada de escolher uma célula no campo minado. Clicar, literalmente, não faz parte deste exercício; não é necessária uma interface gráfica.
 
-
 Requisitos:
 
 1. No início do jogo, a engine deve aceitar parâmetros de altura, largura e número de bombas no tabuleiro. As bombas devem ser distribuídas aleatoriamente, de forma que todas as combinações de posições possíveis tenham a mesma probabilidade de acontecer.
@@ -20,7 +19,6 @@ Requisitos:
   - victory?: retorna true somente se o jogo já acabou e o jogador ganhou.
 
   - board_state: retorna uma representação atual do tabuleiro, indicando quais células ainda não foram descobertas, se alguma foi descoberta e tem uma bomba, quais foram descobertas e têm células com bombas como vizinhas (indicar quantas são as vizinhas minadas), quais não estão descobertas e com bandeira. Se o cliente passar o hash {xray: true} como parâmetro, deve indicar a localização de todas as bombas, mas somente se o jogo estiver terminado.
-
 
 3. Uma célula descoberta deve saber informar o número de bombas adjacentes a ela, se houver alguma (entre 1 e 8). Se não tiver bombas adjacentes, deve ser considerada uma célula descoberta e vazia.
 

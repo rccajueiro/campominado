@@ -40,17 +40,7 @@ Resultado
 
 ### Métodos
 
-- jogando?: Verifica se o jogo esta em andamento, ou seja, quando não foi descoberto bomba ou aberto todas as células válidas. Se errar (clicar em uma bomba) ou abrir todas as células válidas, terá o retorno negativo.
-
-```
-jogo = CampoMinado.new(10, 20, 50)
-
-if jogo.jogando?
-	puts "Jogo em andamento!"
-end
-```
-
-- jogar(x, y): Realiza jogada em uma célula. Recebe as coordenadas (X, Y) e clica na célula correpondendo, relevando espaço vazio, número de bombas em volta ou a própria bomba.
+- jogar(x, y): recebe as coordenadas x e y do tabuleiro e clica na célula correspondente; a célula passa a ser "descoberta". Deve retornar um booleano informando se a jogada foi válida. A jogada é válida somente se a célula selecionada ainda não foi clicada e ainda não tem uma bandeira. Caso a célula clicada seja válida, não tenha uma bomba e seja vizinha de zero bombas, todos os vizinhos sem bomba e sem bandeira daquela célula também devem ser descobertas, e devem seguir esta mesma lógica para seus próprios vizinhos (esse é o comportamento de expansão quando clicamos em uma grande área sem bombas no jogo de campo minado).
 
 ```
 jogo = CampoMinado.new(10, 20, 50)
@@ -60,7 +50,7 @@ if jogo.jogar(0, 0)
 end
 ```
 
-- marcar_bandeira(x, y): Faz uma marcação de bandeira. A célula marcada com bandeira não permite jogada. Se enviar outra marcação na célula marcada com bandeira, irá desmarcar.
+- marcar_bandeira(x, y): diciona uma bandeira a uma célula ainda não clicada ou remove a bandeira preexistente de uma célula. Retorna um booleano informando se a jogada foi válida.
 
 ```
 jogo = CampoMinado.new(10, 20, 50)
@@ -70,24 +60,34 @@ if jogo.marcar_bandeira(0, 0)
 end
 ```
 
-- estado_atual: - Retorna a matriz do jogo com os campos já relevados. Passando como paramêtro *xray: true* e o jogo estiver perdido, retorna a matriz com as bombas reveladas.
+- jogando?: retorna true se o jogo ainda está em andamento, ou false se o jogador tiver alcançado a condição de vitória (todas as células sem bomba foram descobertas) ou de derrota (jogador clicou em uma célula sem bandeira e ela tinha uma bomba).
 
 ```
 jogo = CampoMinado.new(10, 20, 50)
 
-puts jogo.estado_atual
+if jogo.jogando?
+  puts "Jogo em andamento!"
+end
 ```
 
-- ganhou?: - Retorna positivo quando a partida finalizou e abriu todas as céluas válidas.
+- ganhou?: retorna true somente se o jogo já acabou e o jogador ganhou.
 
 ```
 jogo = CampoMinado.new(10, 20, 50)
 
 if jogo.ganhou?
-	puts "Você ganhou! :D"
+  puts "Você ganhou! :D"
 else
-	puts "Você perdeu! :("
+  puts "Você perdeu! :("
 end
+```
+
+- estado_atual: retorna uma representação atual do tabuleiro, indicando quais células ainda não foram descobertas, se alguma foi descoberta e tem uma bomba, quais foram descobertas e têm células com bombas como vizinhas (indicar quantas são as vizinhas minadas), quais não estão descobertas e com bandeira. Se o cliente passar o hash {xray: true} como parâmetro, deve indicar a localização de todas as bombas, mas somente se o jogo estiver terminado.
+
+```
+jogo = CampoMinado.new(10, 20, 50)
+
+puts jogo.estado_atual
 ```
 
 ### Testes unitário
@@ -182,12 +182,126 @@ Informe a posição ou 0 para marcar uma bandeira (flag)
 Posição(x): 
 ```
 
+## Extras
+
+### SimplePrinter.rb
+
+Visualiza a matriz do jogo de forma simples. Exemplo de um jogo com 10 linhas, 20 colunas e 50 bombas:
+
+```
+require './app/lib/CampoMinado/CampoMinado'
+require './app/lib/SimplePrinter'
+
+SimplePrinter.new.print CampoMinado.new(10, 20, 50).estado_atual
+```
+
+Resultado
+```
+____________________
+....................
+....................
+....................
+....................
+....................
+....................
+....................
+....................
+....................
+....................
+====================
+```
+
+### PrettyPrinter.rb
+
+Visualiza a matriz do jogo de forma mais completa, com as linhas e colunas mais visíveis, incluindo posições das linhas e colunas.
+
+```
+require './app/lib/CampoMinado/CampoMinado'
+require './app/lib/PrettyPrinter'
+
+PrettyPrinter.new.print CampoMinado.new(10, 20, 50).estado_atual
+```
+
+Resultado
+```
+   _________________________[10 x 20]_________________________
+  | 1| 2| 3| 4| 5| 6| 7| 8| 9|10|11|12|13|14|15|16|17|18|19|20|
+ 1| .| .| .| .| .| .| .| .| .| .| .| .| .| .| .| .| .| .| .| .|
+ 2| .| .| .| .| .| .| .| .| .| .| .| .| .| .| .| .| .| .| .| .|
+ 3| .| .| .| .| .| .| .| .| .| .| .| .| .| .| .| .| .| .| .| .|
+ 4| .| .| .| .| .| .| .| .| .| .| .| .| .| .| .| .| .| .| .| .|
+ 5| .| .| .| .| .| .| .| .| .| .| .| .| .| .| .| .| .| .| .| .|
+ 6| .| .| .| .| .| .| .| .| .| .| .| .| .| .| .| .| .| .| .| .|
+ 7| .| .| .| .| .| .| .| .| .| .| .| .| .| .| .| .| .| .| .| .|
+ 8| .| .| .| .| .| .| .| .| .| .| .| .| .| .| .| .| .| .| .| .|
+ 9| .| .| .| .| .| .| .| .| .| .| .| .| .| .| .| .| .| .| .| .|
+10| .| .| .| .| .| .| .| .| .| .| .| .| .| .| .| .| .| .| .| .|
+   ===========================================================
+```
+
+### SimpleJSON.rb
+
+Transforma o retorno em string JSON.
+
+- stringfy: retorna a string JSON
+```
+require './app/lib/CampoMinado/CampoMinado'
+require './app/lib/SimpleJSON'
+
+puts SimpleJSON.new.stringfy matriz: CampoMinado.new(3, 5, 5).estado_atual
+```
+
+Resultado
+```
+{"matriz":[[".",".",".",".","."],[".",".",".",".","."],[".",".",".",".","."]]}
+```
+
+- pretty: retorna string de forma que facilita a visualização
+```
+require './app/lib/CampoMinado/CampoMinado'
+require './app/lib/SimpleJSON'
+
+puts SimpleJSON.new.pretty matriz: CampoMinado.new(3, 5, 5).estado_atual
+```
+
+Resultado
+```
+{
+  "matriz": [
+    [
+      ".",
+      ".",
+      ".",
+      ".",
+      "."
+    ],
+    [
+      ".",
+      ".",
+      ".",
+      ".",
+      "."
+    ],
+    [
+      ".",
+      ".",
+      ".",
+      ".",
+      "."
+    ]
+  ]
+}
+```
+
 ## Referências
-* [Ruby on Rails](https://rubificando.wordpress.com/2009/03/02/matrizes) - Matrizes
+
+* [Rubificando on Rails](https://rubificando.wordpress.com/2009/03/02/matrizes) - Matrizes
 * [tutorialspoint](https://www.tutorialspoint.com/ruby/index.htm) - Ruby Tutorial
 * [Stack Overflow](https://stackoverflow.com/questions/2889720/one-liner-in-ruby-for-displaying-a-prompt-getting-input-and-assigning-to-a-var) - One liner in Ruby for displaying a prompt, getting input, and assigning to a variable?
 
 ## Autor
+
 * **Ricardo Cajueiro** - *Software Developer* - [rccajueiro](https://github.com/rccajueiro)
 
 ## Considerações finais
+
