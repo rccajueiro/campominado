@@ -1,10 +1,14 @@
 # CAMPO MINADO
 
 ## Getting Started
-Jogo Campo Minado desenvolvido em Ruby para fins teste de conhecimento
+Campo Minado desenvolvido em Ruby.
 
 ### Pré-requisito
-Sem dependências
+- Ruby
+```
+$ ruby -v
+ruby 2.2.3p173 (2015-08-18 revision 51636) [x86_64-darwin14]
+```
 
 ### Instalação
 ```
@@ -84,6 +88,16 @@ end
 
 - estado_atual: retorna uma representação atual do tabuleiro, indicando quais células ainda não foram descobertas, se alguma foi descoberta e tem uma bomba, quais foram descobertas e têm células com bombas como vizinhas (indicar quantas são as vizinhas minadas), quais não estão descobertas e com bandeira. Se o cliente passar o hash {xray: true} como parâmetro, deve indicar a localização de todas as bombas, mas somente se o jogo estiver terminado.
 
+onde,
+```
+estado_atual_formato: {
+  CELULA_FECHADA:       '.',
+  CELULA_VAZIA:         '',
+  CELULA_COM_BOMBA:     '#',
+  CELULA_COM_BANDEIRA:  'F'
+}
+```
+
 ```
 jogo = CampoMinado.new(10, 20, 50)
 
@@ -108,7 +122,7 @@ ruby test/TestCampoMinado.rb
 
 ### apptest.rb
 
-Cria um jogo com 10 linhas, 20 colunas e 50 bombas. Realiza jogadas e marcações de bandeira aleatoriamente. Finaliza o processo quando perde ou ganha.
+Cria um jogo com 10 linhas, 20 colunas e 50 bombas. Realiza jogadas e marcações de bandeira aleatoriamente. Finaliza quando perde ou ganha.
 
 ```
 ruby apptest.rb
@@ -167,9 +181,17 @@ ruby jogar.rb
 Resultado
 
 ```
+....::::: CAMPO MINADO :::::....
+CTRL+C para SAIR
 Qtd. linhas [padrão: 10]: 5
 Qtd. colunas [padrão: 20]: 10
-Qtd. de bombas [padrão: 50]: 5
+Qtd. de bombas [padrão: 50]: 5_
+```
+
+```
+....::::: CAMPO MINADO :::::....
+CTRL+C para SAIR
+Linhas: 5 / Colunas: 10 / Qtd.bombas: 5
   __________[5 x 10]___________
  | 1| 2| 3| 4| 5| 6| 7| 8| 9|10|
 1| .| .| .| .| .| .| .| .| .| .|
@@ -179,7 +201,7 @@ Qtd. de bombas [padrão: 50]: 5
 5| .| .| .| .| .| .| .| .| .| .|
   =============================
 Informe a posição ou 0 para marcar uma bandeira (flag)
-Posição(x): 
+Posição(x): _
 ```
 
 ## Extras
@@ -213,7 +235,7 @@ ____________________
 
 ### PrettyPrinter.rb
 
-Visualiza a matriz do jogo de forma mais completa, com as linhas e colunas mais visíveis, incluindo posições das linhas e colunas.
+Visualiza a matriz do jogo de forma mais completa, com as linhas e colunas mais visíveis, incluindo posições das linhas e colunas. Exemplo de um jogo com 10 linhas, 20 colunas e 50 bombas:
 
 ```
 require './app/lib/CampoMinado/CampoMinado'
@@ -241,7 +263,7 @@ Resultado
 
 ### SimpleJSON.rb
 
-Transforma o retorno em string JSON.
+Classe de conversão para string JSON.
 
 - stringfy: retorna a string JSON
 ```

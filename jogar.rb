@@ -52,8 +52,6 @@ class Jogar
 
 			if !@jogo.jogar(posicaoX, posicaoY)
 				puts "Jogada inválida"
-			elsif !@jogo.perdeu?
-				PrettyPrinter.new.print @jogo.estado_atual
 			end
 		end
 	end
@@ -73,30 +71,55 @@ class Jogar
 
 			if !@jogo.marcar_bandeira(posicaoX, posicaoY)
 				puts "Marcação de bandeira (Flag) inválida"
-			else
-				PrettyPrinter.new.print @jogo.estado_atual
 			end
 		end
 	end
 
-	private :input, :input_number, :get_linhas, :get_colunas, :get_qtd_bombas, :jogada, :marcar_bandeira
+	def cabecalho
+		system "cls"
+		system "clear"
 
-	def main 
-		@linhas, @colunas, @qtd_bombas = get_linhas, get_colunas, get_qtd_bombas
-		@jogo = CampoMinado.new(@linhas, @colunas, @qtd_bombas)
+		puts "....::::: CAMPO MINADO :::::...."
+		puts "CTRL+C para SAIR"
+	end
 
-		PrettyPrinter.new.print @jogo.estado_atual
+	def tela
+		cabecalho
 
-		while @jogo.jogando?
-			jogada
-		end
-
-		if @jogo.ganhou?
-			puts "**** Você ganhou! :D ****"
+		puts "Linhas: #{@linhas} / Colunas: #{@colunas} / Qtd.bombas: #{@qtd_bombas}"
+		
+		if @jogo.jogando?
+			PrettyPrinter.new.print @jogo.estado_atual
+		elsif @jogo.ganhou?
+			PrettyPrinter.new.print @jogo.estado_atual
+			puts "Você ganhou! :D"
 		else
-			puts "Você perdeu! :("
 			PrettyPrinter.new.print @jogo.estado_atual(xray: true)
-			puts "Fim do jogo."
+			puts "Você perdeu! :("
+		end
+	end
+
+	private :input, :input_number, :get_linhas, :get_colunas, :get_qtd_bombas, :jogada, :marcar_bandeira, :cabecalho, :tela
+
+	def main
+		begin
+			cabecalho
+
+			@linhas, @colunas, @qtd_bombas = get_linhas, get_colunas, get_qtd_bombas
+			@jogo = CampoMinado.new(@linhas, @colunas, @qtd_bombas)
+
+			while @jogo.jogando?
+				tela
+				jogada
+			end
+
+			tela
+		rescue Exception => e
+			if e.message != ''
+				puts "\nErro: " + e.message
+			else
+				puts "\nJogo fechado!"
+			end
 		end
 	end
 end
