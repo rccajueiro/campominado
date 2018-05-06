@@ -88,6 +88,12 @@ end
 
 - estado_atual: retorna uma representação atual do tabuleiro, indicando quais células ainda não foram descobertas, se alguma foi descoberta e tem uma bomba, quais foram descobertas e têm células com bombas como vizinhas (indicar quantas são as vizinhas minadas), quais não estão descobertas e com bandeira. Se o cliente passar o hash {xray: true} como parâmetro, deve indicar a localização de todas as bombas, mas somente se o jogo estiver terminado.
 
+```
+jogo = CampoMinado.new(10, 20, 50)
+
+puts jogo.estado_atual
+```
+
 onde,
 ```
 estado_atual_formato: {
@@ -96,12 +102,6 @@ estado_atual_formato: {
   CELULA_COM_BOMBA:     '#',
   CELULA_COM_BANDEIRA:  'F'
 }
-```
-
-```
-jogo = CampoMinado.new(10, 20, 50)
-
-puts jogo.estado_atual
 ```
 
 ### Testes unitário
