@@ -265,7 +265,7 @@ Resultado
 
 Classe de conversão para string JSON.
 
-- stringfy: retorna a string JSON
+- stringfy: retorna uma string JSON.
 ```
 require './app/lib/CampoMinado/CampoMinado'
 require './app/lib/SimpleJSON'
@@ -278,7 +278,7 @@ Resultado
 {"matriz":[[".",".",".",".","."],[".",".",".",".","."],[".",".",".",".","."]]}
 ```
 
-- pretty: retorna string de forma que facilita a visualização
+- pretty: retorna uma string JSON em formato mais amigável.
 ```
 require './app/lib/CampoMinado/CampoMinado'
 require './app/lib/SimpleJSON'
